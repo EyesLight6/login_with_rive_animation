@@ -9,17 +9,24 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  //control para mostrar/ocultar la contraseña
   bool _obscureText = true;
+
+  StateMachineController? _controller;
+  //SMI: State Machine Input
+  SMIBool? _isChecking;
+  SMIBool? _isHandsUp;
+  SMITrigger? _trigSuccess;
+  SMITrigger? _trigFail;
 
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-
+    //para obtener el tamaño de la pantalla
     return Scaffold(
-      //Evita que se quite espacio del nudge
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          padding: const EdgeInsets.symmetric(horizontal: 20.20),
           child: Column(
             children: [
               SizedBox(
@@ -27,21 +34,61 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 200,
                 child: RiveAnimation.asset(
                   'assets/Animated_login_bear.riv',
-                  fit: BoxFit.contain,
+                  stateMachines: ['Login Machine'],
+                  //Al iniciar la animacion
+                  onInit: (artboard) {
+                    _controller = StateMachineController.fromArtboard(
+                      artboard,
+                      'Login Machine',
+                    );
+                    //Verifica que inicio bien
+                    if (_controller != null) {
+                      artboard.addController(_controller!);
+                      _isChecking =
+                          _controller!.findSMI('isChecking') as SMIBool;
+                      _isHandsUp = _controller!.findSMI('isHandsUp') as SMIBool;
+                      _trigSuccess =
+                          _controller!.findSMI('trigSuccess') as SMITrigger;
+                      _trigFail =
+                          _controller!.findSMI('trigFail') as SMITrigger;
+                    }
+                  },
                 ),
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: 10), //para separacion
               TextField(
+                onChanged: (value) {
+                  if (_isHandsUp != null) {
+                    //No tapes los ojos al ver el email
+                    _isHandsUp!.change(false);
+                  }
+                  //Si is Checking no es nulo
+                  if (_isChecking != null) {
+                    //Activar el modo chismoso
+                    _isChecking!.change(true);
+                  }
+                },
+                keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
-                  hintText: 'Email',
+                  hintText: 'Username',
                   prefixIcon: const Icon(Icons.email),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
                 ),
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 10), //para separacion
               TextField(
+                onChanged: (value) {
+                  if (_isChecking != null) {
+                    //Tapa los ojos al ver la contraseña
+                    _isChecking!.change(false);
+                  }
+                  if (_isHandsUp != null) {
+                    //Levanta las manos al ver la contraseña
+                    _isHandsUp!.change(true);
+                  }
+                },
                 obscureText: _obscureText,
                 decoration: InputDecoration(
                   hintText: 'Password',
@@ -61,7 +108,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
-              const SizedBox(height: 16),
             ],
           ),
         ),
