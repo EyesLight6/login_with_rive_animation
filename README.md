@@ -63,7 +63,7 @@ State Machines make animations feel alive and responsive rather than just playin
 
 ## 🎥 Demo
 
-![[1_Bzm19U6xixjRLi3nRNjSYQ.gif]]
+![Image](https://github.com/user-attachments/assets/9af9e8b4-59fb-4b17-8c3d-b468a28509f8)
 
 _The animated bear reacts to user interactions, creating an engaging login experience_
 
