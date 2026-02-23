@@ -62,8 +62,8 @@ State Machines make animations feel alive and responsive rather than just playin
 ---
 
 ## 🎥 Demo
-No se encontró “demo.gif”.
-![Login Animation Demo](demo.gif)
+
+![[1_Bzm19U6xixjRLi3nRNjSYQ.gif]]
 
 _The animated bear reacts to user interactions, creating an engaging login experience_
 
