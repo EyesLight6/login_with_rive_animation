@@ -1,44 +1,70 @@
-# 🐻 Login with Rive Animation
+# 🎨 Login with Rive Animation
 
-An interactive Flutter login application featuring a charming animated bear character powered by Rive animations. The bear responds dynamically to user interactions, creating an engaging and delightful login experience.
-
----
-## ✨ Features
-
-- 🎭 **Interactive Rive Animation**: Animated bear character that responds to user input
-- 📧 **Email Input Field**: Clean and intuitive email entry
-- 🔒 **Password Input Field**: Secure password entry with visibility toggle
-- 👁️ **Password Visibility Toggle**: Show/hide password functionality
-- 🎨 **Modern UI Design**: Beautiful Material Design 3 interface with smooth animations
-- 📱 **Responsive Layout**: Adapts to different screen sizes
+A polished Flutter login screen featuring interactive Rive animations that make your authentication UI feel alive. The character reacts to focus changes, typing, and validation results for a more engaging experience.
 
 ---
 
-## 🎬 What is Rive?
+## 📱 Features
 
-**Rive** is a powerful real-time interactive design and animation tool that allows designers and developers to create stunning, interactive graphics that run anywhere. Unlike traditional animation formats, Rive animations are rendered in real-time, which means they are incredibly lightweight and can respond to user interactions, making them perfect for creating engaging user experiences.
+- 🎭 **Interactive Rive Animation**: A character driven by a Rive State Machine that responds to user interactions.
+- 👤 **Email / Username Input**: Text field with an email icon.
+- 🔐 **Password Input**: Secure password field with a lock icon.
+- 👁️ **Password Visibility Toggle**: Show/hide the password while typing.
+- ✅❌ **Login Success/Fail Feedback**: Fires `trigSuccess` / `trigFail` based on validation.
+- 🧠 **Look Tracking While Typing**: `numLook` updates according to the email length and returns to neutral after a short debounce.
+- 🙈 **Hands Up on Password Focus**: `isHandsUp` toggles when the password field is focused.
+- ⚠️ **Inline Validation Errors**: Shows `errorText` for invalid email/password input.
+- 📜 **Scrollable Layout**: Uses `SingleChildScrollView` to prevent overflow on small screens.
+- 🎨 **Modern UI Extras**: “Forgot password?” and “Sign up” actions + a styled Login button.
+- 📐 **Responsive Design**: Uses `MediaQuery`.
+- 🧹 **Clean App UI**: `debugShowCheckedModeBanner: false`.
 
 ---
 
-### 🤖 What is a State Machine?
+## 🆕 Latest Updates (2026-03-10)
 
-A **State Machine** in Rive is a powerful feature that enables animations to react to user input and app logic in real-time. It allows you to define different states (like "idle", "looking", "success", "fail") and transitions between them based on triggers or conditions. This makes it possible to create dynamic, interactive animations that respond to user behavior, such as:
+From commit: **`feat(login): add success/fail triggers with email and password regex validation`**
 
-- The bear tracking the user's cursor
-- Showing different expressions based on login success/failure
-- Reacting to text input in real-time
+- 🧾 Added `TextEditingController`s for email and password.
+- 🧪 Added regex validation:
+  - 📧 **Email**: basic `name@domain.tld` format check.
+  - 🔒 **Password**: at least 8 characters with **uppercase**, **lowercase**, **digit**, and a **special character**.
+- 🎛️ Added `_onLogin()` which:
+  - ⚠️ Updates UI errors (`emailError`, `passError`).
+  - ⌨️ Dismisses the keyboard and resets animation states.
+  - ✅ Fires `trigSuccess` or ❌ `trigFail` depending on validation.
 
-State Machines make animations feel alive and responsive rather than just playing predetermined sequences.
+---
+
+## 🎬 What is Rive and a State Machine?
+
+### 🎯 Rive
+
+**Rive** is a real-time interactive design and animation tool used to create vector animations that are:
+
+- 🎮 Interactive and responsive to input
+- 📦 Lightweight at runtime
+- 🔄 Controlled through State Machines
+- 🌐 Cross-platform compatible
+
+---
+
+### 🤖 State Machine
+
+A **State Machine** in Rive controls animation states and transitions. In this project it is used to:
+
+- 🔀 Switch between states like *idle*, *success*, and *fail*
+- 🎭 React to focus/typing events (`isChecking`, `isHandsUp`)
+- ⚡ Trigger specific animations based on login validation
 
 ---
 
 ## 🛠️ Technologies
 
-- **Flutter** `^3.10.8` - UI framework for building natively compiled applications
-- **Dart** - Programming language optimized for building mobile, desktop, and web apps
-- **Rive** `^0.13.20` - Real-time interactive design and animation tool
-- **Material Design 3** - Modern design system for creating beautiful UIs
-- **Cupertino Icons** `^1.0.8` - Icon library
+- 🐦 **Flutter** `^3.10.8`
+- 🎯 **Dart**
+- 🎞️ **Rive** `^0.13.20`
+- 🎨 **Material Design 3**
 
 ---
 
@@ -46,62 +72,37 @@ State Machines make animations feel alive and responsive rather than just playin
 
 ![Project Structure](image.png)
 
-
-----
-
-### 📄 Main Files Description
-
-- **`main.dart`**: The entry point of the application. Sets up the MaterialApp with Material Design 3 theme and routes to the LoginScreen.
-
-- **`login_screen.dart`**: Contains the main login UI with:
-  - Rive animation widget displaying the animated bear
-  - Email TextField with icon and border styling
-  - Password TextField with visibility toggle functionality
-  - Responsive layout using MediaQuery
+```text
+lib/
+├── main.dart                    # App entry point / MaterialApp configuration
+└── Screens/
+    └── login_screen.dart        # Login screen with Rive animation + form logic
+```
 
 ---
 
 ## 🎥 Demo
 
-![[1_Bzm19U6xixjRLi3nRNjSYQ.gif]]
-
-_The animated bear reacts to user interactions, creating an engaging login experience_
-
-
----
-
-## 📚 Course Information
-
-**Subject:** 🎨 Graficación  
-**Professor:** 👨‍🏫 RODRIGO FIDEL GAXIOLA SOSA
-
-
----
-
-## 🎨 Credits
-
-Animation created by the talented designers at Rive. Check out the original animation and more amazing content:
-- 🔗 [Rive Community Files](https://rive.app/community/)
-- 🐻 Original Bear Animation: [Login Animation Bear](https://rive.app/community/files/2432-4873-animated-login-screen/)
+![Demo](1_Bzm19U6xixjRLi3nRNjSYQ.gif)
 
 ---
 
 ## 🚀 Getting Started
 
-### Prerequisites
+### ✅ Prerequisites
 
 - Flutter SDK (3.10.8 or higher)
 - Dart SDK
-- Android Studio / VS Code
+- VS Code / Android Studio
 - An emulator or physical device
 
 ---
 
-### Installation
+### 📦 Installation
 
 1. Clone the repository
 ```bash
-git clone <your-repository-url>
+git clone https://github.com/EyesLight6/login_with_rive_animation.git
 cd login_with_rive_animation
 ```
 
@@ -110,7 +111,7 @@ cd login_with_rive_animation
 flutter pub get
 ```
 
-3. Run the application
+3. Run the app
 ```bash
 flutter run
 ```
@@ -126,9 +127,11 @@ flutter run
 - ✅ macOS
 - ✅ Linux
 
+---
+
 ## 📄 License
 
-This project is for educational purposes as part of the Graficación course.
+This project is created for educational purposes.
 
 ---
 
